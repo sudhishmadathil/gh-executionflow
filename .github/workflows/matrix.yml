@@ -1,6 +1,8 @@
 name: Matrix demo
 on:
-  push
+  push:
+    branches:
+      - devops
 jobs:
   build:
     continue-on-error: true

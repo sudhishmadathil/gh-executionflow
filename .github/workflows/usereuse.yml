@@ -66,12 +66,9 @@ jobs:
           path: dist
   deploy:
     needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get build artifacts
-        uses: ./.github/workflows/reusedeploy.yml
-        with:
-          artifact-name: dist-files
+    uses: ./.github/workflows/reusedeploy.yml
+    with:
+      artifact-name: dist-files
   print-deploy-result:
     needs: deploy
     runs-on: ubuntu-latest

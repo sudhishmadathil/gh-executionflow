@@ -7,8 +7,14 @@ on:
                 required: true
                 type: string
                 default: 'dist'
+        outputs:
+            result:
+                description: 'Result of the deployment'
+                value: ${{ jobs.deploy.outputs.outcome }}
 jobs:
     deploy:
+        outputs:
+            outcome: ${{ steps.set-result.outputs.step-result }}
         runs-on: ubuntu-latest
         steps:
             - name: Get code
@@ -19,3 +25,6 @@ jobs:
               run: ls 
             - name: Output information
               run: echo "Deployed from reusable workflow"
+            - name: Set result output value
+              id: set-result
+              run: echo "step-result=Deployment completed successfully" >> $GITHUB_OUTPUT
